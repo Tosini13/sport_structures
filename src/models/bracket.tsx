@@ -48,23 +48,37 @@ export class Bracket {
   countSmallLastRound = (placeMatch: number) => {
     let matchPlace = 3;
     for (let multiple = 2; multiple < 64; multiple *= 2) {
-      for (let lastSmallRound = multiple, i = 0; lastSmallRound >= 2; i++) {
-        if (i % 2 === 1 && lastSmallRound !== 2) {
+      let asc = true;
+      matchPlace = multiple + 1;
+      for (
+        let lastSmallRound = 2, matchCounter = 0;
+        matchCounter < multiple / 2;
+        matchCounter++, matchPlace += 2
+      ) {
+        if (matchCounter === 0 && matchPlace === placeMatch) {
+          lastSmallRound *= 2;
+          return multiple;
+        } else if (matchCounter % 2 === 1) {
+          // console.log(2);
+          // console.log(matchPlace, placeMatch, matchPlace === placeMatch);
           if (matchPlace === placeMatch) {
             return 2;
           }
-        } else if (i === multiple / 2) {
-          if (matchPlace === placeMatch) {
-            return lastSmallRound;
-          }
-          lastSmallRound /= 2;
         } else {
+          // console.log(lastSmallRound);
+          if (lastSmallRound === multiple / 2) asc = false;
+          // console.log(lastSmallRound);
+          // console.log(matchPlace, placeMatch, matchPlace === placeMatch);
           if (matchPlace === placeMatch) {
             return lastSmallRound;
           }
-          lastSmallRound /= 2;
+          if (asc) {
+            lastSmallRound *= 2;
+          }
+          if (!asc && lastSmallRound > 2) {
+            lastSmallRound /= 2;
+          }
         }
-        matchPlace += 2;
       }
     }
     return 2;
