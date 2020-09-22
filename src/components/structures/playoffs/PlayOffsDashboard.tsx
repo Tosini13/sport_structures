@@ -12,7 +12,7 @@ import PlayOffsChooseRound from "./PlayOffsChooseRound";
 import PlayOffsRound from "./PlayOffsRound";
 
 const PlayOffsDashboard = () => {
-  const [view, setView] = useState(menuPlayOffsConst.bracket);
+  const [view, setView] = useState(menuPlayOffsConst.round);
 
   return (
     <div>

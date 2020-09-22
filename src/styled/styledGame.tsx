@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { colors } from '../../configureFiles/configStyle'
 
 export const GamesContainerStyled = styled.div`
   display: flex;

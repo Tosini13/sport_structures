@@ -1,3 +1,5 @@
+import { observable } from "mobx";
+import { matchModeConst } from "../const/matchConst";
 import { Match } from "./match";
 
 export class Game {
@@ -6,7 +8,7 @@ export class Game {
   previousMatchHome?: Game;
   previousMatchAway?: Game;
   round: string;
-  match: Match;
+  @observable match: Match;
   returnMatch?: Match;
 
   set setWinnerMatch(winnerMatch: Game) {
@@ -39,6 +41,24 @@ export class Game {
     if (this.returnMatch) {
       this.returnMatch.placeholder.home = placeHolder;
     }
+  };
+
+  isFinished = () => {
+    let isFinished = this.match.mode === matchModeConst.finished;
+    if (this.returnMatch && isFinished) {
+      isFinished = this.returnMatch.mode === matchModeConst.finished;
+    }
+    if (isFinished && this.match.result) {
+      if (this.match.result.home > this.match.result.away) {
+        console.log(this.match.home?.name);
+        if (this.winnerMatch?.previousMatchHome === this) {
+          // this.winnerMatch.match.home = this.match.home;
+        }
+      } else {
+        console.log(this.match.away?.name);
+      }
+    }
+    return isFinished;
   };
 
   constructor(round: string, returnMatch: boolean) {

@@ -1,12 +1,12 @@
 import { placeMatchesTitle, roundMatchesTitle } from "../const/structures";
 import { Game } from "./game";
+import { Team } from "./team";
 
 export class Bracket {
   placeMatches: Game[] = [];
   placeMatchesQtt: number;
   bracketLastRound: number;
 
-  //from 9th -> Quarter-final C -> previous away goes wrong (to the same as home)
   createBracket = () => {
     let placeMatch = 1;
     for (
@@ -177,6 +177,30 @@ export class Bracket {
     return placeMatches;
   };
 
+  getLastMatches = (game: Game) => {
+    let games: Game[] = [];
+    if (game.previousMatchHome) {
+      games = [...this.getLastMatches(game.previousMatchHome), ...games];
+    }
+    if (game.previousMatchAway) {
+      games = [...this.getLastMatches(game.previousMatchAway), ...games];
+    }
+    if (!(game.previousMatchHome && game.previousMatchAway)) {
+      return [...games, game];
+    } else {
+      return [...games];
+    }
+  };
+
+  initBracketWithMatches = (teams: Team[]) => {
+    const lastMatches = this.getLastMatches(this.placeMatches[1]);
+    let i = 0;
+    lastMatches.forEach((match) => {
+      match.match.home = teams[i++];
+      match.match.away = teams[i++];
+    });
+  };
+
   constructor(bracketLastRound: number, placeMatches: number) {
     this.bracketLastRound = bracketLastRound / 2;
     this.placeMatchesQtt = this.toValidPlaceMatches(
@@ -191,4 +215,4 @@ export type BracketData = {
   placeMatches: Game[];
   placeMatchesQtt: number;
   bracketLastRound: number;
-}
+};

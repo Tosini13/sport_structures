@@ -1,5 +1,29 @@
 import { action, observable } from "mobx";
 import { Bracket } from "./bracket";
+import { Team } from "./team";
+
+const mockTeamNames = [
+  "Barca",
+  "Real",
+  "Atletico",
+  "Sevilla",
+  "Valencia",
+  "PSG",
+  "Lyon",
+  "Juve",
+  "Inter",
+  "Milan",
+  "Napoli",
+  "Lazio",
+  "Atalanta",
+  "Roma",
+  "Manchester City",
+  "Liverpool",
+  "Manchester United",
+  "Chelsea",
+  "Arsenal",
+  "Tottenham",
+];
 
 export class Tournament {
   bracket?: Bracket;
@@ -25,6 +49,15 @@ export class Tournament {
       this.bracket = new Bracket(this.rounds, this.matchPlace);
     }
   };
+
+  constructor() {
+    this.rounds = 8;
+    this.matchPlace = 15;
+    this.createBracket();
+    //temporary
+    const teams: Team[] = mockTeamNames.map((team) => new Team(team));
+    this.bracket?.initBracketWithMatches(teams);
+  }
 }
 
 export const tournament = new Tournament();

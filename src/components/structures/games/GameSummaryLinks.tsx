@@ -12,11 +12,11 @@ import {
 import MatchSummary from "../matches/MatchSummary";
 
 type Props = {
-  match: Game;
+  game: Game;
   setCurrentMatch: (match: Game) => void;
 };
 
-const GameSummaryLinks: React.FC<Props> = ({ match, setCurrentMatch }) => {
+const GameSummaryLinks: React.FC<Props> = ({ game, setCurrentMatch }) => {
   const getLink = (match: Game | undefined, title: string) => {
     return match ? (
       <GameStyled onClick={() => setCurrentMatch(match)}>
@@ -29,16 +29,16 @@ const GameSummaryLinks: React.FC<Props> = ({ match, setCurrentMatch }) => {
   return (
     <GamesContainerStyled>
       <PreviousGamesContainerStyled>
-        {getLink(match.previousMatchHome, "Previous match home")}
-        {getLink(match.previousMatchAway, "Previous match away")}
+        {getLink(game.previousMatchHome, "Previous match home")}
+        {getLink(game.previousMatchAway, "Previous match away")}
       </PreviousGamesContainerStyled>
       <CurrentGameStyled>
-        <GameTitle>{match.round}</GameTitle>
-        <MatchSummary match={match.match} />
+        <GameTitle>{game.round}</GameTitle>
+        <MatchSummary match={game.match} gameIsFinished={game.isFinished} />
       </CurrentGameStyled>
       <NextGamesContainerStyled>
-        {getLink(match.winnerMatch, "Winner match")}
-        {getLink(match.loserMatch, "Loser match")}
+        {getLink(game.winnerMatch, "Winner match")}
+        {getLink(game.loserMatch, "Loser match")}
       </NextGamesContainerStyled>
     </GamesContainerStyled>
   );

@@ -17,7 +17,7 @@ const PlayOffsRound = observer(() => {
       {tournament.matchPlace ? <p>Match Places: {tournament.matchPlace}</p> : null}
       {currentMatch ? (
         <GameSummaryLinks
-          match={currentMatch}
+          game={currentMatch}
           setCurrentMatch={setCurrentMatch}
         />
       ) : null}
