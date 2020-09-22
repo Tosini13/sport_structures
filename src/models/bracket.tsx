@@ -6,7 +6,7 @@ export class Bracket {
   placeMatchesQtt: number;
   bracketLastRound: number;
 
-  //from 9th -> Quarter-final C -> previous away goes wrong (to the same as home) 
+  //from 9th -> Quarter-final C -> previous away goes wrong (to the same as home)
   createBracket = () => {
     let placeMatch = 1;
     for (
@@ -51,6 +51,32 @@ export class Bracket {
         this.placeMatches[placeMatch] = this.createRound(this.bracketLastRound);
       }
     }
+  };
+
+  linkSmallBracket = (
+    rootGame: Game,
+    totalMatches: number,
+    currentMatch: number
+  ) => {
+    let match = rootGame; //get final
+    let roundCounter = totalMatches;
+    let partMatches = totalMatches/2;
+    currentMatch++;
+    while (
+      match.previousMatchHome &&
+      match.previousMatchAway &&
+      roundCounter > 1
+    ) {
+      if (currentMatch <= partMatches) {
+        match = match.previousMatchHome;
+        partMatches = partMatches - roundCounter / 4;
+      } else {
+        match = match.previousMatchAway;
+        partMatches = partMatches + roundCounter / 4;
+      }
+      roundCounter /= 2;
+    }
+    return match;
   };
 
   countSmallLastRound = (placeMatch: number) => {
@@ -132,31 +158,6 @@ export class Bracket {
         match,
         ++matchNo
       );
-    }
-    return match;
-  };
-
-  linkSmallBracket = (
-    rootGame: Game,
-    totalMatches: number,
-    currentMatch: number
-  ) => {
-    let partMatches: number = totalMatches / 2; //games down from final to join to loser matches
-    let match = rootGame; //get final
-    let roundCounter = 1;
-    while (
-      match.previousMatchHome &&
-      match.previousMatchAway &&
-      roundCounter < totalMatches
-    ) {
-      if (currentMatch < partMatches) {
-        match = match.previousMatchHome;
-        partMatches = partMatches / 2;
-      } else {
-        match = match.previousMatchAway;
-        partMatches = (partMatches * 3) / 2;
-      }
-      roundCounter *= 2;
     }
     return match;
   };
