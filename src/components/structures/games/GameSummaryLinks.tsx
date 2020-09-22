@@ -1,5 +1,5 @@
 import React from "react";
-import { Game } from "../../models/game";
+import { Game } from "../../../models/game";
 import {
   GamesContainerStyled,
   CurrentGameStyled,
@@ -8,14 +8,14 @@ import {
   NextGamesContainerStyled,
   GameCaption,
   GameTitle,
-} from "../../styled/styledGame";
+} from "../../../styled/styledGame";
 
 type Props = {
   match: Game;
   setCurrentMatch: (match: Game) => void;
 };
 
-const MatchSummary: React.FC<Props> = ({ match, setCurrentMatch }) => {
+const GameSummaryLinks: React.FC<Props> = ({ match, setCurrentMatch }) => {
   const getLink = (match: Game | undefined, title: string) => {
     return match ? (
       <GameStyled onClick={() => setCurrentMatch(match)}>
@@ -42,4 +42,4 @@ const MatchSummary: React.FC<Props> = ({ match, setCurrentMatch }) => {
   );
 };
 
-export default MatchSummary;
+export default GameSummaryLinks;

@@ -6,23 +6,31 @@ export class Bracket {
   placeMatchesQtt: number;
   bracketLastRound: number;
 
+  //from 9th -> Quarter-final C -> previous away goes wrong (to the same as home) 
   createBracket = () => {
     let placeMatch = 1;
-    for (let i = 1; i <= this.placeMatchesQtt; i += 2) {
-      if (i !== 1) {
-        placeMatch = i;
-        const lastRound = this.countSmallLastRound(i);
+    for (
+      let matchCounter = 1, smallTitleCounter = 0;
+      matchCounter <= this.placeMatchesQtt;
+      matchCounter += 2
+    ) {
+      if (matchCounter !== 1) {
+        placeMatch = matchCounter;
+        const lastRound = this.countSmallLastRound(matchCounter);
         const lastSmallRound = lastRound / 2;
         console.log(placeMatch, lastRound, placeMatch - lastRound);
+        if ((matchCounter - 1) % 4 === 0) {
+          smallTitleCounter++;
+        }
         this.placeMatches[placeMatch] = this.createRound(
           lastRound,
-          true,
+          String.fromCharCode(65 + smallTitleCounter),
           placeMatch
         );
         for (let j = 0; j < lastRound; j++) {
           const linkSmallMatchIndex = Math.floor(j / 2);
           const linkMatch = this.linkSmallBracket(
-            this.placeMatches[placeMatch - lastRound], //matchPlaceEven doesn't match here
+            this.placeMatches[placeMatch - lastRound],
             lastRound,
             j
           );
@@ -92,17 +100,19 @@ export class Bracket {
 
   createRound = (
     lastRound: number,
-    isSmall: boolean = false,
+    smallTitle?: string,
     round: number = 1,
-    winnerMatch: Game | undefined = undefined,
+    winnerMatch?: Game,
     matchNo: number = 0
   ) => {
     const match = new Game(
-      `${isSmall && matchNo ? "Small " : ""}${
+      `${
         round % 2 === 1
           ? this.getPlaceRoundTitle(round)
           : roundMatchesTitle.get(round)
-      } ${matchNo ? matchNo : ""}`
+      }${smallTitle && matchNo ? ` ${smallTitle}` : ""} ${
+        matchNo ? ` ${matchNo}` : ""
+      }`
     );
     if (matchNo !== 0) matchNo = matchNo * 2 - 2;
     if (round !== 1 && round % 2 === 1) round = 1;
@@ -110,14 +120,14 @@ export class Bracket {
     if (lastRound >= round) {
       match.previousMatchHome = this.createRound(
         lastRound,
-        isSmall,
+        smallTitle,
         round * 2,
         match,
         ++matchNo
       );
       match.previousMatchAway = this.createRound(
         lastRound,
-        isSmall,
+        smallTitle,
         round * 2,
         match,
         ++matchNo
@@ -131,7 +141,7 @@ export class Bracket {
     totalMatches: number,
     currentMatch: number
   ) => {
-    let partMatches: number = totalMatches / 2;
+    let partMatches: number = totalMatches / 2; //games down from final to join to loser matches
     let match = rootGame; //get final
     let roundCounter = 1;
     while (

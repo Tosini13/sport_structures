@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import PlayOffs from "./components/structures/PlayOffs";
+import PlayOffsDashboard from "./components/structures/playoffs/PlayOffsDashboard";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={PlayOffs} />
+        <Route path="/" component={PlayOffsDashboard} />
       </Switch>
     </BrowserRouter>
   );
