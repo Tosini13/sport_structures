@@ -9,6 +9,7 @@ import {
   GameCaption,
   GameTitle,
 } from "../../../styled/styledGame";
+import MatchSummary from "../matches/MatchSummary";
 
 type Props = {
   match: Game;
@@ -33,6 +34,7 @@ const GameSummaryLinks: React.FC<Props> = ({ match, setCurrentMatch }) => {
       </PreviousGamesContainerStyled>
       <CurrentGameStyled>
         <GameTitle>{match.round}</GameTitle>
+        <MatchSummary match={match.match} />
       </CurrentGameStyled>
       <NextGamesContainerStyled>
         {getLink(match.winnerMatch, "Winner match")}

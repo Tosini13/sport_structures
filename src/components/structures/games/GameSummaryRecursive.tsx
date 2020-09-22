@@ -7,15 +7,18 @@ type Props = {
 };
 
 const GameSummaryRecursive: React.FC<Props> = ({ match }) => {
+  const lastMatch =
+    match.previousMatchHome?.loserMatch === match ||
+    match.previousMatchAway?.loserMatch === match;
   return (
     <>
       <div>
         <GameTitle>{match.round}</GameTitle>
       </div>
-      {match.previousMatchHome ? (
+      {!lastMatch && match.previousMatchHome ? (
         <GameSummaryRecursive match={match.previousMatchHome} />
       ) : null}
-      {match.previousMatchAway ? (
+      {!lastMatch && match.previousMatchAway ? (
         <GameSummaryRecursive match={match.previousMatchAway} />
       ) : null}
     </>

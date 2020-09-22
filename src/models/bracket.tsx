@@ -18,7 +18,6 @@ export class Bracket {
         placeMatch = matchCounter;
         const lastRound = this.countSmallLastRound(matchCounter);
         const lastSmallRound = lastRound / 2;
-        console.log(placeMatch, lastRound, placeMatch - lastRound);
         if ((matchCounter - 1) % 4 === 0) {
           smallTitleCounter++;
         }
@@ -39,14 +38,13 @@ export class Bracket {
             lastSmallRound,
             linkSmallMatchIndex
           );
-          linkMatch.loserMatch = linkSmallMatch;
+          linkMatch.setLoserMatch = linkSmallMatch;
           if (j % 2 === 0) {
-            linkSmallMatch.previousMatchHome = linkMatch;
+            linkSmallMatch.setPreviousMatchHome = linkMatch;
           } else {
-            linkSmallMatch.previousMatchAway = linkMatch;
+            linkSmallMatch.setPreviousMatchAway = linkMatch;
           }
         }
-        if (placeMatch === 9) console.log(this.placeMatches[placeMatch]);
       } else {
         this.placeMatches[placeMatch] = this.createRound(this.bracketLastRound);
       }
@@ -60,7 +58,7 @@ export class Bracket {
   ) => {
     let match = rootGame; //get final
     let roundCounter = totalMatches;
-    let partMatches = totalMatches/2;
+    let partMatches = totalMatches / 2;
     currentMatch++;
     while (
       match.previousMatchHome &&
@@ -93,16 +91,11 @@ export class Bracket {
           lastSmallRound *= 2;
           return multiple;
         } else if (matchCounter % 2 === 1) {
-          // console.log(2);
-          // console.log(matchPlace, placeMatch, matchPlace === placeMatch);
           if (matchPlace === placeMatch) {
             return 2;
           }
         } else {
-          // console.log(lastSmallRound);
           if (lastSmallRound === multiple / 2) asc = false;
-          // console.log(lastSmallRound);
-          // console.log(matchPlace, placeMatch, matchPlace === placeMatch);
           if (matchPlace === placeMatch) {
             return lastSmallRound;
           }
@@ -131,6 +124,7 @@ export class Bracket {
     winnerMatch?: Game,
     matchNo: number = 0
   ) => {
+    const returnMatch = false; //temporary
     const match = new Game(
       `${
         round % 2 === 1
@@ -138,20 +132,21 @@ export class Bracket {
           : roundMatchesTitle.get(round)
       }${smallTitle && matchNo ? ` ${smallTitle}` : ""} ${
         matchNo ? ` ${matchNo}` : ""
-      }`
+      }`,
+      returnMatch
     );
     if (matchNo !== 0) matchNo = matchNo * 2 - 2;
     if (round !== 1 && round % 2 === 1) round = 1;
-    if (winnerMatch) match.winnerMatch = winnerMatch;
+    if (winnerMatch) match.setWinnerMatch = winnerMatch;
     if (lastRound >= round) {
-      match.previousMatchHome = this.createRound(
+      match.setPreviousMatchHome = this.createRound(
         lastRound,
         smallTitle,
         round * 2,
         match,
         ++matchNo
       );
-      match.previousMatchAway = this.createRound(
+      match.setPreviousMatchAway = this.createRound(
         lastRound,
         smallTitle,
         round * 2,
@@ -168,7 +163,8 @@ export class Bracket {
       const title = placeMatchesTitle.has(i)
         ? placeMatchesTitle.get(i)
         : `${i}th place`;
-      placeMatchesArray.push(new Game(title));
+      const returnMatch = false;
+      placeMatchesArray.push(new Game(title, returnMatch));
     }
     return placeMatchesArray;
   };
@@ -182,11 +178,17 @@ export class Bracket {
   };
 
   constructor(bracketLastRound: number, placeMatches: number) {
-    this.bracketLastRound = bracketLastRound;
+    this.bracketLastRound = bracketLastRound / 2;
     this.placeMatchesQtt = this.toValidPlaceMatches(
       bracketLastRound,
       placeMatches
     );
     this.createBracket();
   }
+}
+
+export type BracketData = {
+  placeMatches: Game[];
+  placeMatchesQtt: number;
+  bracketLastRound: number;
 }

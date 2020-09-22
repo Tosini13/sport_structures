@@ -1,6 +1,8 @@
 import React from "react";
-import { roundMatchesTitle } from "../../../const/structures";
+import { observer } from "mobx-react";
 
+
+import { roundMatchesTitle } from "../../../const/structures";
 import GameSummaryRecursive from "../games/GameSummaryRecursive";
 import { tournament } from "../../../models/tournament";
 import {
@@ -8,14 +10,13 @@ import {
   WholeBracketContainerStyled,
 } from "../../../styled/styledBracket";
 
-const PlayOffsBracket = () => {
-  console.log(tournament.bracket.placeMatches);
+const PlayOffsBracket = observer(() => {
   return (
     <>
-      <p>Rounds: {roundMatchesTitle.get(tournament.rounds * 2)}</p>
-      <p>Match Places: {tournament.matchPlace}</p>
+      {tournament.rounds ? <p>Rounds: {roundMatchesTitle.get(tournament.rounds)}</p> : null}
+      {tournament.matchPlace ? <p>Match Places: {tournament.matchPlace}</p> : null}
       <WholeBracketContainerStyled>
-        {tournament.bracket.placeMatches.map((match) => (
+        {tournament.bracket?.placeMatches.map((match) => (
           <BracketSectionContainerStyled key={match.round}>
             <GameSummaryRecursive match={match} />
           </BracketSectionContainerStyled>
@@ -23,6 +24,6 @@ const PlayOffsBracket = () => {
       </WholeBracketContainerStyled>
     </>
   );
-};
+});
 
 export default PlayOffsBracket;
