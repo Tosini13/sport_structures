@@ -6,6 +6,7 @@ export class Bracket {
   placeMatches: Game[] = [];
   placeMatchesQtt: number;
   bracketLastRound: number;
+  matchCounter = 0;
 
   createBracket = () => {
     let placeMatch = 1;
@@ -22,7 +23,7 @@ export class Bracket {
           smallTitleCounter++;
         }
         this.placeMatches[placeMatch] = this.createRound(
-          lastRound,
+          lastRound / 2,
           String.fromCharCode(65 + smallTitleCounter),
           placeMatch
         );
@@ -126,6 +127,7 @@ export class Bracket {
   ) => {
     const returnMatch = false; //temporary
     const match = new Game(
+      this.matchCounter++,
       `${
         round % 2 === 1
           ? this.getPlaceRoundTitle(round)
@@ -138,7 +140,7 @@ export class Bracket {
     if (matchNo !== 0) matchNo = matchNo * 2 - 2;
     if (round !== 1 && round % 2 === 1) round = 1;
     if (winnerMatch) match.setWinnerMatch = winnerMatch;
-    if (lastRound >= round) {
+    if (lastRound > round) {
       match.setPreviousMatchHome = this.createRound(
         lastRound,
         smallTitle,
@@ -155,18 +157,6 @@ export class Bracket {
       );
     }
     return match;
-  };
-
-  countPlaceMatches = (placeMatches: number) => {
-    let placeMatchesArray: Game[] = [];
-    for (let i = 1; i <= placeMatches; i += 2) {
-      const title = placeMatchesTitle.has(i)
-        ? placeMatchesTitle.get(i)
-        : `${i}th place`;
-      const returnMatch = false;
-      placeMatchesArray.push(new Game(title, returnMatch));
-    }
-    return placeMatchesArray;
   };
 
   toValidPlaceMatches = (bracketLastRound: number, placeMatches: number) => {
@@ -193,6 +183,7 @@ export class Bracket {
   };
 
   initBracketWithMatches = (teams: Team[]) => {
+    console.log(teams);
     const lastMatches = this.getLastMatches(this.placeMatches[1]);
     let i = 0;
     lastMatches.forEach((match) => {
@@ -202,7 +193,8 @@ export class Bracket {
   };
 
   constructor(bracketLastRound: number, placeMatches: number) {
-    this.bracketLastRound = bracketLastRound / 2;
+    // this.bracketLastRound = bracketLastRound / 2;
+    this.bracketLastRound = bracketLastRound;
     this.placeMatchesQtt = this.toValidPlaceMatches(
       bracketLastRound,
       placeMatches

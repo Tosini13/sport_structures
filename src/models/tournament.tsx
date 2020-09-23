@@ -32,6 +32,9 @@ export class Tournament {
 
   @action
   setRounds = (rounds: number) => {
+    if (this.matchPlace && rounds * 2 < this.matchPlace) {
+      this.matchPlace = rounds * 2 - 1;
+    }
     this.rounds = rounds;
     this.createBracket();
   };

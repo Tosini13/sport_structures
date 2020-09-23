@@ -16,9 +16,9 @@ const PlayOffsBracket = observer(() => {
       {tournament.rounds ? <p>Rounds: {roundMatchesTitle.get(tournament.rounds)}</p> : null}
       {tournament.matchPlace ? <p>Match Places: {tournament.matchPlace}</p> : null}
       <WholeBracketContainerStyled>
-        {tournament.bracket?.placeMatches.map((match) => (
-          <BracketSectionContainerStyled key={match.round}>
-            <GameSummaryRecursive match={match} />
+        {tournament.bracket?.placeMatches.map((game) => (
+          <BracketSectionContainerStyled key={game.round}>
+            <GameSummaryRecursive game={game} />
           </BracketSectionContainerStyled>
         ))}
       </WholeBracketContainerStyled>

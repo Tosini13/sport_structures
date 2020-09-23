@@ -3,23 +3,23 @@ import { Game } from "../../../models/game";
 import { GameTitle } from "../../../styled/styledGame";
 
 type Props = {
-  match: Game;
+  game: Game;
 };
 
-const GameSummaryRecursive: React.FC<Props> = ({ match }) => {
+const GameSummaryRecursive: React.FC<Props> = ({ game }) => {
   const lastMatch =
-    match.previousMatchHome?.loserMatch === match ||
-    match.previousMatchAway?.loserMatch === match;
+  game.previousMatchHome?.loserMatch === game ||
+    game.previousMatchAway?.loserMatch === game;
   return (
     <>
       <div>
-        <GameTitle>{match.round}</GameTitle>
+        <GameTitle>id: {game.id} - {game.round}</GameTitle>
       </div>
-      {!lastMatch && match.previousMatchHome ? (
-        <GameSummaryRecursive match={match.previousMatchHome} />
+      {!lastMatch && game.previousMatchHome ? (
+        <GameSummaryRecursive game={game.previousMatchHome} />
       ) : null}
-      {!lastMatch && match.previousMatchAway ? (
-        <GameSummaryRecursive match={match.previousMatchAway} />
+      {!lastMatch && game.previousMatchAway ? (
+        <GameSummaryRecursive game={game.previousMatchAway} />
       ) : null}
     </>
   );

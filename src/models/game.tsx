@@ -3,6 +3,7 @@ import { matchModeConst } from "../const/matchConst";
 import { Match } from "./match";
 
 export class Game {
+  id: number;
   winnerMatch?: Game;
   loserMatch?: Game;
   previousMatchHome?: Game;
@@ -61,7 +62,8 @@ export class Game {
     return isFinished;
   };
 
-  constructor(round: string, returnMatch: boolean) {
+  constructor(id: number, round: string, returnMatch: boolean) {
+    this.id = id;
     this.round = round;
     this.match = new Match(this.round);
     if (returnMatch) {
