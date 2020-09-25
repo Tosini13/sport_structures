@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 import FormControl from "@material-ui/core/FormControl";
+import { styledColors } from "./styledConst";
 
 export const BracketSectionContainerStyled = styled.div`
   margin: 5px 1px;
   width: fit-content;
-  background-color: gray;
+  background-color: ${styledColors.primary.dark};
   padding: 5px 10px;
   border-radius: 5px;
   height: fit-content;
@@ -20,7 +21,8 @@ export const WholeBracketContainerStyled = styled.div`
 
 export const BracketNavStyled = styled.div`
   display: flex;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${styledColors.primary.dark};
+  color: ${styledColors.secondary.main};
   padding: 5px;
   align-items: center;
   justify-content: space-between;
@@ -39,13 +41,13 @@ export const BracketNavItemStyled = styled.p<{ selected: boolean }>`
   transition: background-color 0.3s;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: ${styledColors.primary.main};
   }
   ${(props) =>
     props.selected
       ? `
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;`
+      background-color: ${styledColors.primary.main};
+      color: ${styledColors.secondary.main};`
       : ``}
 `;
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-import { roundMatchesTitle } from "../../../const/structures";
-import { Game } from "../../../models/game";
-import { tournament } from "../../../models/tournament";
+import { roundMatchesTitle } from "../../const/structures";
+import { Game } from "../../models/game";
+import { tournament } from "../../models/tournament";
 import GameSummaryLinks from "../games/GameSummaryLinks";
 
 const PlayOffsRound = observer(() => {

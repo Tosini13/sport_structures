@@ -1,5 +1,5 @@
 import React from "react";
-import { Game } from "../../../models/game";
+import { Game } from "../../models/game";
 import {
   GamesContainerStyled,
   CurrentGameStyled,
@@ -8,7 +8,7 @@ import {
   NextGamesContainerStyled,
   GameCaption,
   GameTitle,
-} from "../../../styled/styledGame";
+} from "../../styled/styledGame";
 import MatchSummary from "../matches/MatchSummary";
 
 type Props = {

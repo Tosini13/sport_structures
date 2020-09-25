@@ -5,12 +5,18 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import { StylesProvider } from "@material-ui/core/styles";
+import { TournamentStoreProvider } from "./store/TournamentsStore";
+import { RouterStateProvider } from "./store/RouterState";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <StylesProvider injectFirst>
-    <App />
-  </StylesProvider>,
+  <RouterStateProvider>
+    <TournamentStoreProvider>
+      <StylesProvider injectFirst>
+        <App />
+      </StylesProvider>
+    </TournamentStoreProvider>
+  </RouterStateProvider>,
   // </React.StrictMode>
   document.getElementById("root")
 );

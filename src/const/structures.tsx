@@ -40,3 +40,5 @@ export type TeamsPlaceholder = {
   home: string;
   away: string;
 };
+
+export type Id = string | number;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Match } from "../../../models/match";
+import { Match } from "../../models/match";
 
 import MatchDetails from "./MatchDetails";
 

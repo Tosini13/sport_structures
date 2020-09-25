@@ -18,4 +18,3 @@ decorate(AppState, {
 });
 
 export const appState = new AppState();
-// export const appStateContext = createContext(defaultValue);

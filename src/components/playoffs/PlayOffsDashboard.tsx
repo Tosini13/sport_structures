@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-import { menuPlayOffsConst } from "../../../const/menuConst";
+import { menuPlayOffsConst } from "../../const/menuConst";
+import { tournament } from "../../models/tournament";
 import {
   BracketNavItemStyled,
   BracketNavMenuStyled,
   BracketNavStyled,
-} from "../../../styled/styledBracket";
+} from "../../styled/styledBracket";
 import PlayOffsBracket from "./PlayOffsBracket";
 import PlayOffsChooseLastMatchPlace from "./PlayOffsChooseLastMatchPlace";
 import PlayOffsChooseRound from "./PlayOffsChooseRound";
@@ -29,6 +30,14 @@ const PlayOffsDashboard = () => {
             onClick={() => setView(menuPlayOffsConst.bracket)}
           >
             Bracket
+          </BracketNavItemStyled>
+          <BracketNavItemStyled
+            selected={false}
+            onClick={() => {
+              tournament.convertBracket();
+            }}
+          >
+            Convert Bracket
           </BracketNavItemStyled>
         </BracketNavMenuStyled>
         <BracketNavMenuStyled>

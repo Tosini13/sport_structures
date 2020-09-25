@@ -5,8 +5,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
-import { tournament } from "../../../models/tournament";
-import { BracketNavSelectStyled } from "../../../styled/styledBracket";
+import { tournament } from "../../models/tournament";
+import { BracketNavSelectStyled } from "../../styled/styledBracket";
 
 const PlayOffsChooseLastMatchPlace = observer(() => {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {

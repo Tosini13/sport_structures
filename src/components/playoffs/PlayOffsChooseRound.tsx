@@ -5,11 +5,11 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
-import { tournament } from "../../../models/tournament";
+import { tournament } from "../../models/tournament";
 import {
   roundMatchesTitle,
-} from "../../../const/structures";
-import { BracketNavSelectStyled } from "../../../styled/styledBracket";
+} from "../../const/structures";
+import { BracketNavSelectStyled } from "../../styled/styledBracket";
 
 const PlayOffsChooseRound = observer(() => {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {

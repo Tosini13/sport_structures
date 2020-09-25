@@ -4,12 +4,12 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { Match } from "../../../models/match";
+import { Match } from "../../models/match";
 import { observer } from "mobx-react";
 import {
   MatchDetailsResultContainerStyled,
   MatchDetailsTeamsContainerStyled,
-} from "../../../styled/styledMatch";
+} from "../../styled/styledMatch";
 import MatchDetailsDashboard from "./MatchDetailsDashboard";
 
 type Props = {

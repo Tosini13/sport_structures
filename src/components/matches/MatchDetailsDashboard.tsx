@@ -4,8 +4,8 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DialogActions from "@material-ui/core/DialogActions";
 
-import { Match } from "../../../models/match";
-import { matchModeConst } from "../../../const/matchConst";
+import { Match } from "../../models/match";
+import { matchModeConst } from "../../const/matchConst";
 import { observer } from "mobx-react";
 
 type Props = {

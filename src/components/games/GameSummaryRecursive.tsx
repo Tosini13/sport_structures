@@ -1,6 +1,6 @@
 import React from "react";
-import { Game } from "../../../models/game";
-import { GameTitle } from "../../../styled/styledGame";
+import { Game } from "../../models/game";
+import { GameTitle } from "../../styled/styledGame";
 
 type Props = {
   game: Game;

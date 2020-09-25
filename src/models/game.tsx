@@ -1,9 +1,10 @@
 import { observable } from "mobx";
 import { matchModeConst } from "../const/matchConst";
+import { Id } from "../const/structures";
 import { Match } from "./match";
 
 export class Game {
-  id: number;
+  id: Id;
   winnerMatch?: Game;
   loserMatch?: Game;
   previousMatchHome?: Game;

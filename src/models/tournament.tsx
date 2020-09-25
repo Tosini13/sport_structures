@@ -1,6 +1,9 @@
 import { action, observable } from "mobx";
+import moment from "moment";
+import { bracketDbApi } from "./dbAPI/bracketData";
 import { Bracket } from "./bracket";
 import { Team } from "./team";
+import { Id } from "../const/structures";
 
 const mockTeamNames = [
   "Barca",
@@ -26,9 +29,33 @@ const mockTeamNames = [
 ];
 
 export class Tournament {
+  id?: Id;
+  date: string = moment().format();
+  name: string;
   bracket?: Bracket;
+  @observable teams: Team[] = [];
   @observable rounds?: number;
   @observable matchPlace?: number;
+
+  @action
+  addTeam = (team: Team) => {
+    this.teams = [...this.teams, team];
+  };
+
+  @action
+  deleteTeam = (teamToDelete: Team) => {
+    const teams = this.teams.filter((team) => team.id !== teamToDelete.id);
+    this.teams = [...teams];
+  };
+
+  @action
+  editTeam = (teamToEdit: Team) => {
+    this.teams.forEach((team) => {
+      if (team.id === teamToEdit.id) {
+        team = teamToEdit;
+      }
+    });
+  };
 
   @action
   setRounds = (rounds: number) => {
@@ -53,17 +80,24 @@ export class Tournament {
     }
   };
 
-  constructor() {
-    this.rounds = 8;
-    this.matchPlace = 15;
-    this.createBracket();
-    //temporary
-    const teams: Team[] = mockTeamNames.map((team) => new Team(team));
-    this.bracket?.initBracketWithMatches(teams);
+  convertBracket = () => {
+    if (this.bracket) {
+      return bracketDbApi.convertBracket(this.bracket);
+    }
+  };
+
+  constructor(name: string) {
+    this.name = name;
+    // this.rounds = 8;
+    // this.matchPlace = 15;
+    // this.createBracket();
+    // //temporary
+    // const teams: Team[] = mockTeamNames.map((team) => new Team(team));
+    // this.bracket?.initBracketWithMatches(teams);
   }
 }
 
-export const tournament = new Tournament();
+export const tournament = new Tournament("no one");
 
 export type TournamentData = {
   bracket?: Bracket;

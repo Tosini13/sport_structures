@@ -183,7 +183,6 @@ export class Bracket {
   };
 
   initBracketWithMatches = (teams: Team[]) => {
-    console.log(teams);
     const lastMatches = this.getLastMatches(this.placeMatches[1]);
     let i = 0;
     lastMatches.forEach((match) => {
@@ -193,7 +192,6 @@ export class Bracket {
   };
 
   constructor(bracketLastRound: number, placeMatches: number) {
-    // this.bracketLastRound = bracketLastRound / 2;
     this.bracketLastRound = bracketLastRound;
     this.placeMatchesQtt = this.toValidPlaceMatches(
       bracketLastRound,
