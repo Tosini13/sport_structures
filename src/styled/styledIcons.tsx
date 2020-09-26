@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { styledColors } from "./styledConst";
+import { mainTheme } from "./styledConst";
 
 export const HamburgerStyled = styled.div<{ open: boolean }>`
   display: flex;
@@ -9,7 +9,7 @@ export const HamburgerStyled = styled.div<{ open: boolean }>`
   align-items: center;
   width: 25px;
   > div {
-    background-color: ${styledColors.secondary.main};
+    background-color: ${mainTheme.palette.secondary.main};
     width: 100%;
     height: 3px;
     border-radius: 2px;

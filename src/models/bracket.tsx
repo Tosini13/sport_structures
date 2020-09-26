@@ -1,12 +1,30 @@
+import { action, observable } from "mobx";
 import { placeMatchesTitle, roundMatchesTitle } from "../const/structures";
 import { Game } from "./game";
 import { Team } from "./team";
 
 export class Bracket {
   placeMatches: Game[] = [];
-  placeMatchesQtt: number;
-  bracketLastRound: number;
   matchCounter = 0;
+  @observable rounds: number;
+  @observable placeMatchesQtt: number;
+
+  @action
+  setRounds = (rounds: number) => {
+    if (this.placeMatchesQtt && rounds * 2 < this.placeMatchesQtt) {
+      this.placeMatchesQtt = rounds * 2 - 1;
+    }
+    this.rounds = rounds;
+    this.createBracket();
+  };
+
+  @action
+  setPlaceMatchesQtt = (placeMatchesQtt: number) => {
+    if (this.rounds && placeMatchesQtt < this.rounds * 2) {
+      this.placeMatchesQtt = placeMatchesQtt;
+      this.createBracket();
+    }
+  };
 
   createBracket = () => {
     let placeMatch = 1;
@@ -47,7 +65,7 @@ export class Bracket {
           }
         }
       } else {
-        this.placeMatches[placeMatch] = this.createRound(this.bracketLastRound);
+        this.placeMatches[placeMatch] = this.createRound(this.rounds);
       }
     }
   };
@@ -159,9 +177,9 @@ export class Bracket {
     return match;
   };
 
-  toValidPlaceMatches = (bracketLastRound: number, placeMatches: number) => {
+  toValidPlaceMatches = (rounds: number, placeMatches: number) => {
     if (placeMatches % 2 === 0) return 1;
-    while (bracketLastRound * 2 - 1 < placeMatches) {
+    while (rounds * 2 - 1 < placeMatches) {
       placeMatches -= 2;
     }
     return placeMatches;
@@ -182,7 +200,7 @@ export class Bracket {
     }
   };
 
-  initBracketWithMatches = (teams: Team[]) => {
+  initBracketWithTeams = (teams: Team[]) => {
     const lastMatches = this.getLastMatches(this.placeMatches[1]);
     let i = 0;
     lastMatches.forEach((match) => {
@@ -191,12 +209,9 @@ export class Bracket {
     });
   };
 
-  constructor(bracketLastRound: number, placeMatches: number) {
-    this.bracketLastRound = bracketLastRound;
-    this.placeMatchesQtt = this.toValidPlaceMatches(
-      bracketLastRound,
-      placeMatches
-    );
+  constructor(rounds: number, placeMatches: number) {
+    this.rounds = rounds;
+    this.placeMatchesQtt = this.toValidPlaceMatches(rounds, placeMatches);
     this.createBracket();
   }
 }
@@ -204,5 +219,10 @@ export class Bracket {
 export type BracketData = {
   placeMatches: Game[];
   placeMatchesQtt: number;
-  bracketLastRound: number;
+  rounds: number;
+};
+
+export type Options = {
+  rounds: number;
+  placeMatchesQtt: number;
 };

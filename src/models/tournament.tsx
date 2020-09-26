@@ -4,28 +4,20 @@ import { bracketDbApi } from "./dbAPI/bracketData";
 import { Bracket } from "./bracket";
 import { Team } from "./team";
 import { Id } from "../const/structures";
+import { Group } from "./group";
 
-const mockTeamNames = [
-  "Barca",
-  "Real",
-  "Atletico",
-  "Sevilla",
-  "Valencia",
-  "PSG",
-  "Lyon",
-  "Juve",
-  "Inter",
-  "Milan",
-  "Napoli",
-  "Lazio",
-  "Atalanta",
-  "Roma",
-  "Manchester City",
-  "Liverpool",
-  "Manchester United",
-  "Chelsea",
-  "Arsenal",
-  "Tottenham",
+const mockTeams = [
+  { name: "FC Barcelona", id: 0 },
+  { name: "Real Madrid", id: 1 },
+  { name: "Atletico Madrid", id: 2 },
+  { name: "Sevilla FC", id: 3 },
+  { name: "Athletic Bilbao", id: 4 },
+  { name: "Valencia", id: 5 },
+  { name: "Getafe", id: 6},
+  { name: "Eibar", id: 7 },
+  { name: "Malaga", id: 8 },
+  { name: "U.D. Las Palmas", id: 9 },
+  { name: "Real Sociedad", id: 10 },
 ];
 
 export class Tournament {
@@ -33,7 +25,8 @@ export class Tournament {
   date: string = moment().format();
   name: string;
   bracket?: Bracket;
-  @observable teams: Team[] = [];
+  groups?: Group[];
+  @observable teams: Team[] = mockTeams;
   @observable rounds?: number;
   @observable matchPlace?: number;
 
@@ -63,21 +56,20 @@ export class Tournament {
       this.matchPlace = rounds * 2 - 1;
     }
     this.rounds = rounds;
-    this.createBracket();
+    this.createBracket(this.rounds, 1);
   };
 
   @action
   setMatchPlace = (matchPlace: number) => {
     if (this.rounds && matchPlace < this.rounds * 2) {
       this.matchPlace = matchPlace;
-      this.createBracket();
+      this.createBracket(this.rounds, this.matchPlace);
     }
   };
 
-  createBracket = () => {
-    if (this.rounds && this.matchPlace) {
-      this.bracket = new Bracket(this.rounds, this.matchPlace);
-    }
+  @action
+  createBracket = (rounds: number, placeMatchesQtt: number) => {
+    this.bracket = new Bracket(rounds, placeMatchesQtt);
   };
 
   convertBracket = () => {

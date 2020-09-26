@@ -26,7 +26,9 @@ const AddTeam: React.FC<Props> = ({ tournament }) => {
   const onSubmit = (e: any) => {
     console.log(e);
     if (/[\S]/.test(name)) {
-      tournament.addTeam(new Team(name));
+      const team = new Team(name);
+      team.id = tournament.teams.length; //temporary
+      tournament.addTeam(team);
       setName("");
     } else {
       console.log("wrong string");
@@ -39,12 +41,12 @@ const AddTeam: React.FC<Props> = ({ tournament }) => {
           label="Nazwa"
           onChange={handleChange}
           value={name}
+          color="secondary"
           inputProps={{
             name: "name",
             ref: register({
               required: "Required",
               maxLength: 255,
-              minLength: 2,
             }),
           }}
           helperText={

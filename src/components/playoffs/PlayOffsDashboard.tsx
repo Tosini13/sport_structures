@@ -8,8 +8,8 @@ import {
   BracketNavStyled,
 } from "../../styled/styledBracket";
 import PlayOffsBracket from "./PlayOffsBracket";
-import PlayOffsChooseLastMatchPlace from "./PlayOffsChooseLastMatchPlace";
-import PlayOffsChooseRound from "./PlayOffsChooseRound";
+import PlayOffsChooseLastMatchPlace from "./create/PlayOffsChooseLastMatchPlace";
+import PlayOffsChooseRound from "./create/PlayOffsChooseRound";
 import PlayOffsRound from "./PlayOffsRound";
 
 const PlayOffsDashboard = () => {
@@ -40,10 +40,10 @@ const PlayOffsDashboard = () => {
             Convert Bracket
           </BracketNavItemStyled>
         </BracketNavMenuStyled>
-        <BracketNavMenuStyled>
+        {/* <BracketNavMenuStyled>
           <PlayOffsChooseRound />
           <PlayOffsChooseLastMatchPlace />
-        </BracketNavMenuStyled>
+        </BracketNavMenuStyled> */}
       </BracketNavStyled>
       {view === menuPlayOffsConst.round ? <PlayOffsRound /> : null}
       {view === menuPlayOffsConst.bracket ? <PlayOffsBracket /> : null}

@@ -35,7 +35,7 @@ export class BracketDbApi {
     const bracketDb: BracketDataDb = {
       games: this.convertGames(bracket.placeMatches),
       placeMatchesQtt: bracket.placeMatchesQtt,
-      bracketLastRound: bracket.bracketLastRound,
+      rounds: bracket.rounds,
     };
     return bracketDb;
   };
@@ -46,11 +46,11 @@ export const bracketDbApi = new BracketDbApi();
 export type BracketDataApp = {
   placeMatches: Game[];
   placeMatchesQtt: number;
-  bracketLastRound: number;
+  rounds: number;
 };
 
 export type BracketDataDb = {
   games: GameDataDb[];
   placeMatchesQtt: number;
-  bracketLastRound: number;
+  rounds: number;
 };

@@ -4,7 +4,9 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+import { ThemeProvider } from "@material-ui/core/styles";
 import { StylesProvider } from "@material-ui/core/styles";
+import { mainTheme } from "./styled/styledConst";
 import { TournamentStoreProvider } from "./store/TournamentsStore";
 import { RouterStateProvider } from "./store/RouterState";
 
@@ -12,9 +14,11 @@ ReactDOM.render(
   // <React.StrictMode>
   <RouterStateProvider>
     <TournamentStoreProvider>
-      <StylesProvider injectFirst>
-        <App />
-      </StylesProvider>
+      <ThemeProvider theme={mainTheme}>
+        <StylesProvider injectFirst>
+          <App />
+        </StylesProvider>
+      </ThemeProvider>
     </TournamentStoreProvider>
   </RouterStateProvider>,
   // </React.StrictMode>

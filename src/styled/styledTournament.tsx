@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import ListItem from "@material-ui/core/ListItem";
 import Stepper from "@material-ui/core/Stepper";
-import { styledColors } from "./styledConst";
+import { mainTheme, styledColors } from "./styledConst";
 
 export const TournamentDashboardMenuStyled = styled.div`
-  background-color: ${styledColors.primary.main};
+  background-color: ${mainTheme.palette.primary.main};
   display: flex;
   justify-content: space-around;
   filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
@@ -16,7 +16,7 @@ export const TournamentDashboardMenuItemStyled = styled.div<{
   selected: boolean;
 }>`
   transition: background-color 0.3s;
-  color: ${styledColors.secondary.main};
+  color: ${mainTheme.palette.secondary.main};
   padding: 7px 7px;
   margin: 5px 0px 2px 0px;
   border-radius: 5px;
@@ -24,7 +24,7 @@ export const TournamentDashboardMenuItemStyled = styled.div<{
   font-size: 13px;
   ${(props) =>
     props.selected
-      ? `background-color: ${styledColors.primary.dark};`
+      ? `background-color: ${mainTheme.palette.primary.dark};`
       : `background-color: ${styledColors.transparent.main};`}
 `;
 
@@ -53,9 +53,9 @@ export const TournamentDashboardElementStyled = styled.li<{
   align-items: center;
   ${(props) =>
     props.selected
-      ? `background-color: ${styledColors.primary.dark};
+      ? `background-color: ${mainTheme.palette.primary.dark};
     transform: translateY(5px);`
-      : `background-color: ${styledColors.primary.main};`}
+      : `background-color: ${mainTheme.palette.primary.main};`}
 `;
 
 export const TournamentListItemStyled = styled(ListItem)`
@@ -72,7 +72,7 @@ export const TournamentLinkItemStyled = styled(Link)`
   justify-content: space-between;
   align-items: stretch;
   width: 100%;
-  color: ${styledColors.secondary.main};
+  color: ${mainTheme.palette.secondary.main};
   text-decoration: none;
   > div {
     display: flex;
@@ -86,7 +86,7 @@ export const TournamentListItemTitleStyled = styled.p`
   padding: 0px;
   margin: 0px;
   margin-left: 5px;
-  color: ${styledColors.secondary.main};
+  color: ${mainTheme.palette.secondary.main};
   font-size: 15px;
   text-align: center;
   flex-grow: 1;
@@ -131,12 +131,12 @@ export const TournamentDetailsHeaderStyled = styled.div`
 export const TournamentDetailsTitleStyled = styled.div`
   font-size: 20px;
   text-align: center;
-  color: ${styledColors.secondary.main};
+  color: ${mainTheme.palette.secondary.main};
   flex-grow: 1;
 `;
 
 export const TournamentDetailsInfoStyled = styled.div`
-  color: ${styledColors.secondary.main};
+  color: ${mainTheme.palette.secondary.main};
   display: flex;
   align-items: center;
 `;
@@ -147,7 +147,7 @@ export const TournamentDetailsInfoTitleStyled = styled.p`
 `;
 
 export const TournamentDetailsInfoContentStyled = styled.p`
-  color: ${styledColors.secondary.light};
+  color: ${mainTheme.palette.secondary.light};
   font-size: 20px;
   margin: 5px;
   margin-left: 10px;
@@ -163,5 +163,5 @@ export const TournamentCreationStepperStyled = styled(Stepper)`
 `;
 
 export const TournamentCreationStepLabelStyled = styled.span`
-  color: ${styledColors.secondary.light};
+  color: ${mainTheme.palette.secondary.light};
 `;

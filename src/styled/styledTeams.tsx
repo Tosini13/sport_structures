@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { styledColors } from "./styledConst";
+import { mainTheme } from "./styledConst";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -27,7 +27,7 @@ export const TeamListStyled = styled(List)`
 `;
 
 export const TeamListElementStyled = styled(ListItem)`
-  color: ${styledColors.secondary.main};
+  color: ${mainTheme.palette.secondary.main};
   padding: 5px;
 `;
 

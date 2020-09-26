@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { styledColors } from "./styledConst";
+import { mainTheme } from "./styledConst";
 
 export const BodyContainer = styled.div`
   display: flex;
@@ -14,10 +14,14 @@ export const MainContainer = styled.main`
   overflow-x: hidden;
   overflow-y: auto;
   flex-grow: 1;
-  background-color: ${styledColors.primary.dark};
+  background-color: ${mainTheme.palette.primary.dark};
 `;
 
 export const NoContentTitle = styled.p`
   text-align: center;
-  color: ${styledColors.secondary.dark};
+  color: ${mainTheme.palette.secondary.dark};
+`;
+
+export const ContentContainerStyled = styled.div`
+  padding: 5px;
 `;
