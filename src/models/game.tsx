@@ -2,6 +2,7 @@ import { observable } from "mobx";
 import { matchModeConst } from "../const/matchConst";
 import { Id } from "../const/structures";
 import { Match } from "./match";
+import { Team } from "./team";
 
 export class Game {
   id: Id;
@@ -45,19 +46,85 @@ export class Game {
     }
   };
 
+  winnerTeam = (match: Match, returnMatch?: Match) => {
+    if (match.result === undefined) return false;
+    let home = match.result.home;
+    let away = match.result.away;
+    if (returnMatch?.result !== undefined) {
+      home += returnMatch.result.away;
+      away += returnMatch.result.home;
+    }
+    const result = home - away;
+    if (result > 0) return match.home;
+    if (result < 0) return match.away;
+    if (result === 0) {
+      if (returnMatch?.result !== undefined) {
+        if (returnMatch.result.away > match.result.away) return match.home;
+        if (returnMatch.result.away < match.result.away) return match.away;
+        if (returnMatch.result.away === match.result.away) return false; //temporary
+      } else {
+        return false; //temporary
+      }
+    }
+  };
+
+  loserTeam = (winnerTeam: Team | false | undefined) => {
+    if (winnerTeam === this.match.home) {
+      return this.match.away;
+    }
+    if (winnerTeam === this.match.away) {
+      return this.match.home;
+    }
+    return false;
+  };
+
+  promoteTeam = (team: Team | undefined) => {
+    if (this.winnerMatch?.previousMatchHome === this) {
+      this.winnerMatch.match.setHome(team);
+      if (this.winnerMatch.returnMatch) {
+        this.winnerMatch.returnMatch.setAway(team);
+      }
+    }
+    if (this.winnerMatch?.previousMatchAway === this) {
+      this.winnerMatch.match.setAway(team);
+      if (this.winnerMatch.returnMatch) {
+        this.winnerMatch.returnMatch.setHome(team);
+      }
+    }
+  };
+
+  demoteTeam = (team: Team | undefined) => {
+    if (this.loserMatch?.previousMatchHome === this) {
+      this.loserMatch.match.setHome(team);
+      if (this.loserMatch.returnMatch) {
+        this.loserMatch.returnMatch.setAway(team);
+      }
+    }
+    if (this.loserMatch?.previousMatchAway === this) {
+      this.loserMatch.match.setAway(team);
+      if (this.loserMatch.returnMatch) {
+        this.loserMatch.returnMatch.setHome(team);
+      }
+    }
+  };
+
   isFinished = () => {
     let isFinished = this.match.mode === matchModeConst.finished;
     if (this.returnMatch && isFinished) {
       isFinished = this.returnMatch.mode === matchModeConst.finished;
     }
     if (isFinished && this.match.result) {
-      if (this.match.result.home > this.match.result.away) {
-        console.log(this.match.home?.name);
-        if (this.winnerMatch?.previousMatchHome === this) {
-          // this.winnerMatch.match.home = this.match.home;
-        }
+      const promoted = this.winnerTeam(this.match, this.returnMatch);
+      const demoted = this.loserTeam(promoted);
+      if (promoted) {
+        this.promoteTeam(promoted);
       } else {
-        console.log(this.match.away?.name);
+        this.promoteTeam(undefined);
+      }
+      if (demoted) {
+        this.demoteTeam(demoted);
+      } else {
+        this.demoteTeam(undefined);
       }
     }
     return isFinished;

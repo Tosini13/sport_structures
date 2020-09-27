@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Select from "@material-ui/core/Select";
 
-import { mainTheme } from "./styledConst";
+import { mainTheme, styledColors } from "./styledConst";
 
 export const BracketSectionContainerStyled = styled.div`
   text-align: center;
@@ -67,6 +65,9 @@ export const ChooseListItemStyled = styled(ListItem)`
   background-color: ${mainTheme.palette.secondary.main};
   border-radius: 3px;
   padding: 0px 5px;
+  &:hover {
+    background-color: ${mainTheme.palette.secondary.main};
+  }
 `;
 
 export const ChooseListItemSecondaryActionStyled = styled(
@@ -75,47 +76,20 @@ export const ChooseListItemSecondaryActionStyled = styled(
   right: 0px;
 `;
 
-export const ChooseListItemTextStyled = styled(ListItemText)`
+export const ListItemTextStyled = styled(ListItemText)`
   > .MuiTypography-body1 {
     font-size: 0.8rem;
   }
 `;
 
-export const BracketRoundTitleStyled = styled.div`
+export const BracketRoundTitleStyled = styled.div<{ live: boolean }>`
   font-size: 9px;
-  color: ${mainTheme.palette.secondary.main};
-`;
-
-export const BracketMatchTeamsContainerStyled = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  > p:nth-child(1) {
-    grid-column: 1/4;
-    justify-content: flex-end;
-    text-align: right;
-  }
-  > p:nth-child(2) {
-    grid-column: 4/5;
-  }
-  > p:nth-child(3) {
-    grid-column: 5/8;
-    justify-content: flex-start;
-  }
-  > p {
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-export const BracketMatchContainerStyled = styled.div`
-  background-color: ${mainTheme.palette.primary.main};
-  margin: 3px 0px;
-  padding: 5px;
-  border-radius: 5px;
-  box-sizing: border-box;
+  color: ${mainTheme.palette.secondary.dark};
+  ${(props) =>
+    props.live
+      ? `
+      color: ${styledColors.icons.live};`
+      : ``}
 `;
 
 export const BracketRoundsContainerStyled = styled.div`

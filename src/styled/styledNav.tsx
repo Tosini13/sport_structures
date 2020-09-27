@@ -37,7 +37,7 @@ export const NavContainerStyled = styled.div`
   width: 100%;
   background-color: ${mainTheme.palette.primary.main};
   color: ${mainTheme.palette.secondary.main};
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   z-index: 10;
 `;
 
@@ -56,7 +56,8 @@ export const BottomNavigationStyled = styled(BottomNavigation)`
   max-width: 100vw;
   min-height: 55px;
   overflow: hidden;
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px -3px 8px rgba(0, 0, 0, 0.24);
+  z-index: 10;
 `;
 
 export const BottomNavigationActionLinkStyled = styled(Link)`

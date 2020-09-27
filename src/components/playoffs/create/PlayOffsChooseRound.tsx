@@ -30,10 +30,6 @@ const PlayOffsChooseRound: React.FC<Props> = observer(
   ({ options, setRounds, toggleRoundsActive }) => {
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       const rounds = event.target.value as number;
-      let placeMatchesQtt = options.placeMatchesQtt;
-      if (placeMatchesQtt && rounds * 2 < placeMatchesQtt) {
-        placeMatchesQtt = rounds * 2 - 1;
-      }
       setRounds(rounds);
     };
 

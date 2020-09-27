@@ -13,7 +13,7 @@ const mockTeams = [
   { name: "Sevilla FC", id: 3 },
   { name: "Athletic Bilbao", id: 4 },
   { name: "Valencia", id: 5 },
-  { name: "Getafe", id: 6},
+  { name: "Getafe", id: 6 },
   { name: "Eibar", id: 7 },
   { name: "Malaga", id: 8 },
   { name: "U.D. Las Palmas", id: 9 },
@@ -24,11 +24,9 @@ export class Tournament {
   id?: Id;
   date: string = moment().format();
   name: string;
-  bracket?: Bracket;
+  @observable bracket?: Bracket;
   groups?: Group[];
   @observable teams: Team[] = mockTeams;
-  @observable rounds?: number;
-  @observable matchPlace?: number;
 
   @action
   addTeam = (team: Team) => {
@@ -51,20 +49,8 @@ export class Tournament {
   };
 
   @action
-  setRounds = (rounds: number) => {
-    if (this.matchPlace && rounds * 2 < this.matchPlace) {
-      this.matchPlace = rounds * 2 - 1;
-    }
-    this.rounds = rounds;
-    this.createBracket(this.rounds, 1);
-  };
-
-  @action
-  setMatchPlace = (matchPlace: number) => {
-    if (this.rounds && matchPlace < this.rounds * 2) {
-      this.matchPlace = matchPlace;
-      this.createBracket(this.rounds, this.matchPlace);
-    }
+  deletePlayOffs = () => {
+    this.bracket = undefined;
   };
 
   @action
@@ -80,12 +66,6 @@ export class Tournament {
 
   constructor(name: string) {
     this.name = name;
-    // this.rounds = 8;
-    // this.matchPlace = 15;
-    // this.createBracket();
-    // //temporary
-    // const teams: Team[] = mockTeamNames.map((team) => new Team(team));
-    // this.bracket?.initBracketWithMatches(teams);
   }
 }
 

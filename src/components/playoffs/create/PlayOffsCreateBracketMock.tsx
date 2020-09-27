@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import { Bracket } from "../../../models/bracket";
 import { Game } from "../../../models/game";
 import { BracketSectionContainerStyled } from "../../../styled/styledBracket";
-import GameSummaryRecursiveNew from "../../games/GameSummaryRecursiveNew";
+import GameSummaryRecursiveMock from "../../games/GameSummaryRecursiveMock";
 import { Team } from "../../../models/team";
 
 type Props = {
@@ -17,7 +17,7 @@ const PlayOffsCreateBracketMock: React.FC<Props> = observer(
       <>
         {bracket.placeMatches.map((game: Game) => (
           <BracketSectionContainerStyled key={game.round}>
-            <GameSummaryRecursiveNew game={game} teams={teams} />
+            <GameSummaryRecursiveMock game={game} teams={teams} />
           </BracketSectionContainerStyled>
         ))}
       </>

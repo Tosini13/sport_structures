@@ -1,12 +1,12 @@
 import React from "react";
 
-import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { Match } from "../../models/match";
 import { observer } from "mobx-react";
 import {
+  MatchDetailsContainerStyled,
   MatchDetailsResultContainerStyled,
   MatchDetailsTeamsContainerStyled,
 } from "../../styled/styledMatch";
@@ -16,7 +16,7 @@ type Props = {
   match: Match;
   open: boolean;
   setOpen: (open: boolean) => void;
-  gameIsFinished: () => boolean;
+  gameIsFinished?: () => boolean;
 };
 
 const MatchDetails: React.FC<Props> = observer(
@@ -27,7 +27,8 @@ const MatchDetails: React.FC<Props> = observer(
 
     return (
       <div>
-        <Dialog
+        <MatchDetailsContainerStyled
+          color="primary"
           open={open}
           onClose={handleClose}
           aria-labelledby="form-dialog-title"
@@ -48,7 +49,7 @@ const MatchDetails: React.FC<Props> = observer(
             match={match}
             gameIsFinished={gameIsFinished}
           />
-        </Dialog>
+        </MatchDetailsContainerStyled>
       </div>
     );
   }

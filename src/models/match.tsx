@@ -1,15 +1,26 @@
 import { Team } from "./team";
-import { Result, TeamsPlaceholder } from "../const/structures";
+import { Id, Result, TeamsPlaceholder } from "../const/structures";
 import { matchModeConst } from "../const/matchConst";
 import { action, observable } from "mobx";
 
 export class Match {
-  home?: Team;
-  away?: Team;
+  id?: Id;
+  @observable home?: Team;
+  @observable away?: Team;
   placeholder: TeamsPlaceholder;
   @observable result?: Result;
   round: string;
   @observable mode: matchModeConst;
+
+  @action
+  setHome = (team: Team | undefined) => {
+    this.home = team;
+  };
+
+  @action
+  setAway = (team: Team | undefined) => {
+    this.away = team;
+  };
 
   @action
   homeScored = () => {
@@ -54,11 +65,13 @@ export class Match {
 
   @action
   startMatch = () => {
-    this.mode = matchModeConst.live;
-    this.result = {
-      home: 0,
-      away: 0,
-    };
+    if (this.home && this.away) {
+      this.mode = matchModeConst.live;
+      this.result = {
+        home: 0,
+        away: 0,
+      };
+    }
   };
 
   @action

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
 import { mainTheme } from "./styledConst";
 
 export const BodyContainer = styled.div`
@@ -24,4 +25,9 @@ export const NoContentTitle = styled.p`
 
 export const ContentContainerStyled = styled.div`
   padding: 5px;
+`;
+
+export const LinkStyled = styled(Link)`
+  color: inherit;
+  text-decoration: none;
 `;

@@ -34,7 +34,7 @@ const GameSummaryLinks: React.FC<Props> = ({ game, setCurrentMatch }) => {
       </PreviousGamesContainerStyled>
       <CurrentGameStyled>
         <GameTitle>{game.round}</GameTitle>
-        <MatchSummary match={game.match} gameIsFinished={game.isFinished} />
+        {/* <MatchSummary match={game.match} gameIsFinished={game.isFinished} /> */}
       </CurrentGameStyled>
       <NextGamesContainerStyled>
         {getLink(game.winnerMatch, "Winner match")}

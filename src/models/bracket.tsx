@@ -133,7 +133,7 @@ export class Bracket {
   getPlaceRoundTitle = (round: number) => {
     let title = placeMatchesTitle.get(round);
     if (title) return title;
-    return `${round}th place`;
+    return `o ${round} miejsce`;
   };
 
   createRound = (

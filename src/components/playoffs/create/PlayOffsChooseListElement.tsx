@@ -8,7 +8,7 @@ import { Team } from "../../../models/team";
 import {
   ChooseListItemSecondaryActionStyled,
   ChooseListItemStyled,
-  ChooseListItemTextStyled,
+  ListItemTextStyled,
 } from "../../../styled/styledBracket";
 import { PromotedTeam } from "../../../const/groupConst";
 
@@ -32,7 +32,7 @@ const PlayOffsChooseListElement: React.FC<Props> = ({
         addToChosenTeams(element);
       }}
     >
-      <ChooseListItemTextStyled primary={element.name} />
+      <ListItemTextStyled primary={element.name} />
       <ChooseListItemSecondaryActionStyled>
         <IconButton>{selected ? <RemoveIcon /> : <AddIcon />}</IconButton>
       </ChooseListItemSecondaryActionStyled>

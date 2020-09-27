@@ -10,7 +10,7 @@ import { observer } from "mobx-react";
 
 type Props = {
   match: Match;
-  gameIsFinished: () => boolean;
+  gameIsFinished?: () => boolean;
 };
 
 const MatchDetailsDashboard: React.FC<Props> = observer(
@@ -18,20 +18,23 @@ const MatchDetailsDashboard: React.FC<Props> = observer(
     const changeMatchMode = (mode: matchModeConst) => {
       switch (mode) {
         case matchModeConst.live:
-          match.startMatch();
-          gameIsFinished();
-          return true;
+          if (match.mode === matchModeConst.finished) {
+            match.continueMatch();
+          } else {
+            match.startMatch();
+          }
+          break;
         case matchModeConst.finished:
           match.finishMatch();
-          gameIsFinished();
-          return true;
+          break;
         case matchModeConst.notStarted:
           match.resetMatch();
-          gameIsFinished();
-          return true;
+          break;
         default:
           match.continueMatch();
-          gameIsFinished();
+      }
+      if (gameIsFinished) {
+        gameIsFinished();
       }
     };
 
