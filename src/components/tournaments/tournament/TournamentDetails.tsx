@@ -7,6 +7,7 @@ import TournamentTeams from "./TournamentTeams";
 import TournamentMenu from "./TournamentMenu";
 import TournamentPlayOffs from "./TournamentPlayOffs";
 import { ContentContainerStyled } from "../../../styled/styledLayout";
+import TournamentGroups from "./TournamentGroups";
 
 const TournamentDetails = () => {
   const [view, setView] = useState<menuTournamentConst>(
@@ -21,6 +22,9 @@ const TournamentDetails = () => {
     <>
       <TournamentMenu id={tournament?.id} view={view} setView={setView} />
       <ContentContainerStyled>
+        {view === menuTournamentConst.groups && tournament ? (
+          <TournamentGroups tournament={tournament} />
+        ) : null}
         {view === menuTournamentConst.playoffs && tournament ? (
           <TournamentPlayOffs tournament={tournament} />
         ) : null}
