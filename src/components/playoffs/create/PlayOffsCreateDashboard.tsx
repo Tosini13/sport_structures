@@ -20,10 +20,8 @@ const PlayOffsCreateDashboard: React.FC<Props> = observer(
     const [options, setOptions] = useState<Options>({
       rounds: 4,
       placeMatchesQtt: 1,
+      roundsActive: false,
     });
-    const [bracket, setBracket] = useState(
-      new Bracket(options.rounds, options.placeMatchesQtt)
-    );
     const [chosenTeams, setChosenTeams] = useState<Team[] | PromotedTeam[]>(
       tournament.teams.slice(0, options.rounds * 2)
     );
@@ -43,14 +41,12 @@ const PlayOffsCreateDashboard: React.FC<Props> = observer(
       if (placeMatchesQtt >= rounds * 2) {
         placeMatchesQtt = rounds * 2 - 1;
       }
-      const newBracket = new Bracket(rounds, placeMatchesQtt);
-      newBracket.initBracketWithTeams(chosen);
       setOptions({
+        ...options,
         rounds,
         placeMatchesQtt,
       });
-      setChosenTeams(chosen);
-      setBracket(newBracket);
+      // setChosenTeams(chosen);
     };
 
     const setPlaceMatchesQtt = (placeMatchesQtt: number) => {
@@ -58,10 +54,17 @@ const PlayOffsCreateDashboard: React.FC<Props> = observer(
       if (placeMatchesQtt % 2) {
         console.log(placeMatchesQtt);
         setOptions({
-          rounds: options.rounds,
+          ...options,
           placeMatchesQtt,
         });
       }
+    };
+
+    const toggleRoundsActive = () => {
+      setOptions({
+        ...options,
+        roundsActive: !options.roundsActive,
+      });
     };
 
     const handleSetChosenTeams = (teams: Team[] | PromotedTeam[]) => {
@@ -70,28 +73,24 @@ const PlayOffsCreateDashboard: React.FC<Props> = observer(
       if (placeMatchesQtt >= rounds * 2) {
         placeMatchesQtt = rounds * 2 - 1;
       }
-      const newBracket = new Bracket(rounds, placeMatchesQtt);
-      newBracket.initBracketWithTeams(teams);
-      setOptions({
-        rounds,
-        placeMatchesQtt,
-      });
+      // setOptions({
+      //   ...options,
+      //   rounds,
+      //   placeMatchesQtt,
+      // });
       setChosenTeams(teams);
-      setBracket(newBracket);
     };
-
-    // useEffect(() => {
-    //   const newBracket = new Bracket(rounds, placeMatchesQtt);
-    //   const chosen = tournament.teams.slice(0, rounds * 2);
-    //   newBracket.initBracketWithTeams(chosen);
-    //   setBracket(newBracket);
-    //   setChosenTeams(chosen);
-    // }, [tournament.teams]);
 
     const submitBracket = () => {
       tournament.bracket = bracket;
     };
 
+    const bracket = new Bracket(
+      options.roundsActive ? options.rounds : validRounds(chosenTeams.length),
+      options.placeMatchesQtt
+    );
+    bracket.initBracketWithTeams(chosenTeams);
+    console.log(bracket);
     return (
       <div>
         <PlayOffsCreateMenu
@@ -99,6 +98,7 @@ const PlayOffsCreateDashboard: React.FC<Props> = observer(
           options={options}
           setRounds={setRounds}
           setPlaceMatchesQtt={setPlaceMatchesQtt}
+          toggleRoundsActive={toggleRoundsActive}
           submitBracket={submitBracket}
         />
         <PlayOffsChooseList

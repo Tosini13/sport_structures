@@ -10,7 +10,7 @@ import { ContentContainerStyled } from "../../../styled/styledLayout";
 
 const TournamentDetails = () => {
   const [view, setView] = useState<menuTournamentConst>(
-    menuTournamentConst.info
+    menuTournamentConst.playoffs
   );
   const { id } = useParams<{ id: string }>();
   const tournamentsStore = useContext(TournamentStoreContext);

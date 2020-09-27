@@ -1,7 +1,8 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import InputLabel from "@material-ui/core/InputLabel";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
@@ -10,18 +11,15 @@ import { Options } from "../../../models/bracket";
 
 type Props = {
   options: Options;
-  setOptions: (options: Options) => void;
+  setPlaceMatchesQtt: (placeMatchesQtt: number) => void;
 };
 
 const PlayOffsChooseLastMatchPlace: React.FC<Props> = observer(
-  ({ options, setOptions }) => {
+  ({ options, setPlaceMatchesQtt }) => {
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       const placeMatchesQtt = event.target.value as number;
       if (options.rounds && placeMatchesQtt < options.rounds * 2) {
-        setOptions({
-          ...options,
-          placeMatchesQtt: event.target.value as number,
-        });
+        setPlaceMatchesQtt(event.target.value as number);
       }
     };
 
@@ -32,21 +30,27 @@ const PlayOffsChooseLastMatchPlace: React.FC<Props> = observer(
       }
     }
     return (
-      <BracketNavSelectStyled>
-        <InputLabel>Places:</InputLabel>
-        <Select
-          color="secondary"
-          value={options.placeMatchesQtt}
-          onChange={handleChange}
-        >
-          {places.map((place) => {
-            return (
-              <MenuItem key={place} value={place}>
-                {place}
-              </MenuItem>
-            );
-          })}
-        </Select>
+      <BracketNavSelectStyled row>
+        <FormLabel component="legend">Places:</FormLabel>
+        <FormControlLabel
+          label=""
+          labelPlacement="start"
+          control={
+            <Select
+              color="secondary"
+              value={options.placeMatchesQtt}
+              onChange={handleChange}
+            >
+              {places.map((place) => {
+                return (
+                  <MenuItem key={place} value={place}>
+                    {place}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          }
+        />
       </BracketNavSelectStyled>
     );
   }

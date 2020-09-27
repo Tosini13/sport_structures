@@ -225,4 +225,5 @@ export type BracketData = {
 export type Options = {
   rounds: number;
   placeMatchesQtt: number;
+  roundsActive: boolean;
 };

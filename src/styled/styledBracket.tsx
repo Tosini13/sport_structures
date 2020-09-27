@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from "@material-ui/core/FormControl";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Select from "@material-ui/core/Select";
 
 import { mainTheme } from "./styledConst";
 
@@ -50,8 +52,8 @@ export const BracketNavItemStyled = styled.p<{ selected: boolean }>`
       : ``}
 `;
 
-export const BracketNavSelectStyled = styled(FormControl)`
-  margin: 0px 5px;
+export const BracketNavSelectStyled = styled(FormGroup)`
+  margin: 10px 5px 0px 5px;
   min-width: 100px;
 `;
 

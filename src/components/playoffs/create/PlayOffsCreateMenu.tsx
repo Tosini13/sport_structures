@@ -13,12 +13,21 @@ import PlayOffsChooseRound from "./PlayOffsChooseRound";
 type Props = {
   toggleCreate: () => void;
   options: Options;
-  setOptions: (options: Options) => void;
+  setRounds: (rounds: number) => void;
+  setPlaceMatchesQtt: (placeMatchesQtt: number) => void;
+  toggleRoundsActive: () => void;
   submitBracket: () => void;
 };
 
 const PlayOffsCreateMenu: React.FC<Props> = observer(
-  ({ toggleCreate, options, setOptions, submitBracket }) => {
+  ({
+    toggleCreate,
+    options,
+    setRounds,
+    setPlaceMatchesQtt,
+    submitBracket,
+    toggleRoundsActive,
+  }) => {
     return (
       <>
         <ButtonHorizontalContainerStyled>
@@ -37,13 +46,15 @@ const PlayOffsCreateMenu: React.FC<Props> = observer(
             Stwórz
           </ButtonSuccessStyled>
         </ButtonHorizontalContainerStyled>
-        <ButtonHorizontalContainerStyled>
-          <PlayOffsChooseRound options={options} setOptions={setOptions} />
-          <PlayOffsChooseLastMatchPlace
-            options={options}
-            setOptions={setOptions}
-          />
-        </ButtonHorizontalContainerStyled>
+        <PlayOffsChooseLastMatchPlace
+          options={options}
+          setPlaceMatchesQtt={setPlaceMatchesQtt}
+        />
+        <PlayOffsChooseRound
+          options={options}
+          setRounds={setRounds}
+          toggleRoundsActive={toggleRoundsActive}
+        />
       </>
     );
   }
