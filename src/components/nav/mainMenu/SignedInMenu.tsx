@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import List from "@material-ui/core/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -10,19 +10,21 @@ import ListItem from "@material-ui/core/ListItem";
 
 import { MenuLinkStyled } from "../../../styled/styledNav";
 import { routerConstString } from "../../../const/menuConst";
+import { UserStoreContext } from "../../../store/UserStore";
 
 type Props = {
   toggleSideBarMenu: () => void;
 };
 
 const SignedInMenu: React.FC<Props> = ({ toggleSideBarMenu }) => {
+  const usersStore = useContext(UserStoreContext);
   return (
     <List>
       <ListItem>
         <ListItemIcon>
           <AccountCircleIcon />
         </ListItemIcon>
-        <ListItemText primary="USER" />
+        <ListItemText primary={usersStore.loggedIn?.login} />
       </ListItem>
       <ListItem>
         <MenuLinkStyled

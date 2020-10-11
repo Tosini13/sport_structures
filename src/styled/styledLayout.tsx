@@ -16,6 +16,7 @@ export const MainContainer = styled.main`
   overflow-y: auto;
   flex-grow: 1;
   background-color: ${mainTheme.palette.primary.dark};
+  padding: 0px 5px;
 `;
 
 export const NoContentTitle = styled.p`
@@ -25,6 +26,7 @@ export const NoContentTitle = styled.p`
 
 export const ContentContainerStyled = styled.div`
   padding: 5px;
+  padding-top: 35px;
 `;
 
 export const LinkStyled = styled(Link)`

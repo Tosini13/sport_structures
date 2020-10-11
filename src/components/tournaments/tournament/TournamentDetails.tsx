@@ -8,15 +8,16 @@ import TournamentMenu from "./TournamentMenu";
 import TournamentPlayOffs from "./TournamentPlayOffs";
 import { ContentContainerStyled } from "../../../styled/styledLayout";
 import TournamentGroups from "./TournamentGroups";
+import { Tournament } from "../../../models/tournament";
 
 const TournamentDetails = () => {
   const [view, setView] = useState<menuTournamentConst>(
-    menuTournamentConst.playoffs
+    menuTournamentConst.groups
   );
   const { id } = useParams<{ id: string }>();
   const tournamentsStore = useContext(TournamentStoreContext);
   const tournament = tournamentsStore.tournaments.find(
-    (tournament) => tournament.id?.toString() === id.toString()
+    (tournament: Tournament) => tournament.id?.toString() === id.toString()
   );
   return (
     <>

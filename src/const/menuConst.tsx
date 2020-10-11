@@ -38,7 +38,7 @@ export enum routerConstString {
 
 export let bottomMenuTitleConst = new Map();
 bottomMenuTitleConst.set(bottomMenuConst.tournaments, "Turnieje");
-bottomMenuTitleConst.set(bottomMenuConst.live, "Live");
+bottomMenuTitleConst.set(bottomMenuConst.live, "Na żywo");
 bottomMenuTitleConst.set(bottomMenuConst.my, "Moje");
 bottomMenuTitleConst.set(bottomMenuConst.favorites, "Ulubione");
 

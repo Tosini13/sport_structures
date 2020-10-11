@@ -1,37 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 
-import MenuSideBar from './mainMenu/MenuSideBar'
-import { NavBarStyled, NavContainerStyled } from '../../styled/styledNav';
-import { IconButtonBackStyled } from '../../styled/styledButtons';
-import { HamburgerStyled } from '../../styled/styledIcons';
+import MenuSideBar from "./mainMenu/MenuSideBar";
+import { NavBarStyled, NavContainerStyled } from "../../styled/styledNav";
+import { IconButtonNavStyled } from "../../styled/styledButtons";
+import { HamburgerStyled } from "../../styled/styledIcons";
+import DayNavbar from "./TopNav.tsx/DayNavbar";
 
 const Navbar = () => {
+  const [sideBarMenuOpened, setSideBarMenu] = useState(false);
 
-    const [sideBarMenuOpened, setSideBarMenu] = useState(false)
+  const toggleSideBarMenu = () => {
+    setSideBarMenu(!sideBarMenuOpened);
+  };
 
-    const toggleSideBarMenu = () => {
-        setSideBarMenu(!sideBarMenuOpened);
-    }
-
-    return (
-        <>
-            <NavContainerStyled>
-                <NavBarStyled>
-                    <IconButtonBackStyled className='btn-back'>
-                        <KeyboardArrowLeftIcon fontSize="large" />
-                    </IconButtonBackStyled>
-                    <HamburgerStyled open={sideBarMenuOpened} onClick={toggleSideBarMenu}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </HamburgerStyled>
-                </NavBarStyled>
-            </NavContainerStyled>
-            <MenuSideBar sideBarMenuOpened={sideBarMenuOpened} toggleSideBarMenu={toggleSideBarMenu} />
-        </>
-    )
-}
+  return (
+    <>
+      <NavContainerStyled>
+        <NavBarStyled>
+          <IconButtonNavStyled>
+            <DateRangeIcon />
+          </IconButtonNavStyled>
+          <DayNavbar />
+          <HamburgerStyled open={sideBarMenuOpened} onClick={toggleSideBarMenu}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </HamburgerStyled>
+        </NavBarStyled>
+      </NavContainerStyled>
+      <MenuSideBar
+        sideBarMenuOpened={sideBarMenuOpened}
+        toggleSideBarMenu={toggleSideBarMenu}
+      />
+    </>
+  );
+};
 
 export default Navbar;

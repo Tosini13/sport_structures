@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 
-// import FavoriteIcon from "@material-ui/icons/Favorite";
-// import StarIcon from "@material-ui/icons/Star";
-// import AdjustIcon from "@material-ui/icons/Adjust";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import StarIcon from "@material-ui/icons/Star";
+import AdjustIcon from "@material-ui/icons/Adjust";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
@@ -41,7 +41,7 @@ const BottomNav = observer(() => {
           value={bottomMenuConst.tournaments}
           icon={<EmojiEventsIcon />}
         />
-        {/* <BottomNavigationAction
+        <BottomNavigationAction
           component={BottomNavigationActionLinkStyled}
           to={routerConstString.live}
           label={bottomMenuTitleConst.get(bottomMenuConst.live)}
@@ -61,7 +61,7 @@ const BottomNav = observer(() => {
           label={bottomMenuTitleConst.get(bottomMenuConst.favorites)}
           value={bottomMenuConst.favorites}
           icon={<StarIcon />}
-        /> */}
+        />
       </BottomNavigationStyled>
     </>
   );

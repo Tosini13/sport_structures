@@ -58,7 +58,6 @@ export const BracketMatchMockTeamsContainerStyled = styled.div`
 export const BracketMatchContainerStyled = styled.div`
   background-color: ${mainTheme.palette.primary.main};
   margin: 3px 0px;
-  padding: 5px;
   border-radius: 5px;
   box-sizing: border-box;
 `;

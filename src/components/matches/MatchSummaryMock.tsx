@@ -2,11 +2,11 @@ import React from "react";
 
 import { Team } from "../../models/team";
 import { Match } from "../../models/match";
-import { BracketRoundTitleStyled } from "../../styled/styledBracket";
 import {
-  BracketMatchContainerStyled,
-  BracketMatchMockTeamsContainerStyled,
-} from "../../styled/styledMatches";
+  MatchContainerStyled,
+  MatchRoundTitleStyled,
+  MatchMockTeamsContainerStyled,
+} from "../../styled/styledMatch";
 
 type Props = {
   match: Match;
@@ -17,18 +17,18 @@ const MatchSummaryMock: React.FC<Props> = ({ match, teams }) => {
   const home = teams.find((team) => team.id === match.home?.id);
   const away = teams.find((team) => team.id === match.away?.id);
   return (
-    <BracketMatchContainerStyled>
+    <MatchContainerStyled>
       {match.round ? (
-        <BracketRoundTitleStyled live={false}>
-          {match.round}
-        </BracketRoundTitleStyled>
+        <MatchRoundTitleStyled live={false}>
+          Round {match.round}
+        </MatchRoundTitleStyled>
       ) : null}
-      <BracketMatchMockTeamsContainerStyled>
+      <MatchMockTeamsContainerStyled>
         <p>{home ? home.name : match.placeholder.home}</p>
         <p>vs</p>
         <p>{away ? away.name : match.placeholder.away}</p>
-      </BracketMatchMockTeamsContainerStyled>
-    </BracketMatchContainerStyled>
+      </MatchMockTeamsContainerStyled>
+    </MatchContainerStyled>
   );
 };
 

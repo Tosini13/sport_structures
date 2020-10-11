@@ -2,6 +2,7 @@ import { Team } from "./team";
 import { Id, Result, TeamsPlaceholder } from "../const/structures";
 import { matchModeConst } from "../const/matchConst";
 import { action, observable } from "mobx";
+import { Moment } from "moment";
 
 export class Match {
   id?: Id;
@@ -11,6 +12,7 @@ export class Match {
   @observable result?: Result;
   round: string;
   @observable mode: matchModeConst;
+  date?: Moment | string;
 
   @action
   setHome = (team: Team | undefined) => {

@@ -1,10 +1,18 @@
 import React from "react";
 import { observable, action, decorate } from "mobx";
-import { Tournament } from "../models/tournament";
-const tournament = new Tournament("zero");
-tournament.id = 0;
-const tournament2 = new Tournament("one");
-tournament2.id = 1;
+import { Tournament, TournamentData } from "../models/tournament";
+import User from "../models/user";
+const tournamentData: TournamentData = {
+  name: "zero",
+  owner: "admin",
+};
+const tournament = new Tournament(tournamentData);
+tournament.id = 1;
+const tournament2 = new Tournament({
+  name: "one",
+  owner: "other",
+});
+tournament2.id = 2;
 export class TournamentStore {
   tournaments: Tournament[] = [tournament, tournament2];
 
@@ -12,6 +20,19 @@ export class TournamentStore {
 
   addTournament = (tournament: Tournament) => {
     this.tournaments = [...this.tournaments, tournament];
+  };
+
+  getUsersTournaments = (user: User) => {
+    return this.tournaments.filter(
+      (tournament) => tournament.owner === user.login
+    );
+  };
+
+  getUsersFavoriteTournaments = (user: User) => {
+    return this.tournaments.filter(
+      (tournament) =>
+        tournament.id && user.favoriteTournaments.includes(tournament.id)
+    );
   };
 }
 

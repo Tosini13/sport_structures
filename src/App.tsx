@@ -21,6 +21,15 @@ const App = () => {
               path={routerConstString.tournaments}
               component={TournamentsDashboard}
             />
+            <Route path={routerConstString.live}>
+              <TournamentsDashboard view={routerConstString.live} />
+            </Route>
+            <Route path={routerConstString.my}>
+              <TournamentsDashboard view={routerConstString.my} />
+            </Route>
+            <Route path={routerConstString.favorites}>
+              <TournamentsDashboard view={routerConstString.favorites} />
+            </Route>
             <Route path={routerConstString.tournament + "/:id"}>
               <TournamentDetails />
             </Route>

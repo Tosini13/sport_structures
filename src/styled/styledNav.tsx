@@ -31,6 +31,7 @@ export const NavBarStyled = styled.nav`
   justify-content: space-between;
   z-index: 10;
   height: 30px;
+  align-items: center;
 `;
 
 export const NavContainerStyled = styled.div`
@@ -68,4 +69,15 @@ export const BottomNavigationActionLinkStyled = styled(Link)`
   .MuiBottomNavigationAction-label.Mui-selected {
     font-size: 0.575rem;
   }
+`;
+
+export const DayNavbarContainerStyled = styled.div`
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+  color: ${mainTheme.palette.secondary.main};
+  margin: 0px 5px;
+  margin: auto 5px;
+  height: 100%;
 `;

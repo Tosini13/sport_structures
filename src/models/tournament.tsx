@@ -4,7 +4,8 @@ import { bracketDbApi } from "./dbAPI/bracketData";
 import { Bracket } from "./bracket";
 import { Team } from "./team";
 import { Id } from "../const/structures";
-import { Group } from "./group";
+import { GroupStage } from "./groupStage";
+import { Login } from "../const/userConst";
 
 const mockTeams = [
   { name: "FC Barcelona", id: 0 },
@@ -22,11 +23,17 @@ const mockTeams = [
 
 export class Tournament {
   id?: Id;
+  owner: Login;
   date: string = moment().format();
   name: string;
   @observable bracket?: Bracket;
-  groups?: Group[];
+  @observable groupStage?: GroupStage;
   @observable teams: Team[] = mockTeams;
+  matchTimeInGroup?: number = 5;
+  breakTimeInGroup?: number = 1;
+  matchTimeInBracket?: number = 6;
+  breakTimeInBracket?: number = 2;
+  fields: number = 3;
 
   @action
   addTeam = (team: Team) => {
@@ -49,6 +56,11 @@ export class Tournament {
   };
 
   @action
+  deleteGroups = () => {
+    this.groupStage = undefined;
+  };
+
+  @action
   deletePlayOffs = () => {
     this.bracket = undefined;
   };
@@ -64,15 +76,27 @@ export class Tournament {
     }
   };
 
-  constructor(name: string) {
-    this.name = name;
+  constructor(tournament: TournamentData) {
+    this.name = tournament.name;
+    this.owner = tournament.owner;
   }
 }
 
-export const tournament = new Tournament("no one");
+const tournamentData: TournamentData = {
+  name: "no one",
+  owner: "admin",
+};
+export const tournament: Tournament = new Tournament(tournamentData);
 
 export type TournamentData = {
+  name: string;
+  owner: Login;
   bracket?: Bracket;
   rounds?: number;
   matchPlace?: number;
+  matchTimeInGroup?: number;
+  breakTimeInGroup?: number;
+  matchTimeInBracket?: number;
+  breakTimeInBracket?: number;
+  fields?: number;
 };

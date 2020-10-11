@@ -6,10 +6,14 @@ import Stepper from "@material-ui/core/Stepper";
 import { mainTheme, styledColors } from "./styledConst";
 
 export const TournamentDashboardMenuStyled = styled.div`
+  position: fixed;
+  left: 0;
+  z-index: 9;
+  width: 100%;
   background-color: ${mainTheme.palette.primary.main};
   display: flex;
   justify-content: space-around;
-  filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 export const TournamentDashboardMenuItemStyled = styled.div<{
@@ -59,12 +63,15 @@ export const TournamentDashboardElementStyled = styled.li<{
 `;
 
 export const TournamentListItemStyled = styled(ListItem)`
+  display: flex;
+  align-items: stretch;
   position: relative;
   margin-top: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
   padding: 5px;
+  background-color: ${mainTheme.palette.primary.main};
 `;
 
 export const TournamentLinkItemStyled = styled(Link)`
@@ -110,10 +117,10 @@ export const TournamentListItemImgStyled = styled.img`
   border-radius: 5px;
 `;
 
-export const TournamentListItemFavouriteStyled = styled.div`
-  padding: 1px;
-  border-radius: 3px;
-  font-size: 0px;
+export const TournamentListItemActionSideStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const TournamentDetailsContainerStyled = styled.div`

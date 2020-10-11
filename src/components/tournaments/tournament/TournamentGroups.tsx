@@ -10,6 +10,9 @@ import {
   ButtonHorizontalContainerStyled,
   ButtonSuccessStyled,
 } from "../../../styled/styledButtons";
+import GroupsCreate from "../../groups/create/GroupsCreate";
+import { GroupStage } from "../../../models/groupStage";
+import GroupList from "../../groups/GroupsList";
 
 type Props = {
   tournament: Tournament;
@@ -19,20 +22,23 @@ const TournamentGroups: React.FC<Props> = observer(({ tournament }) => {
   const [create, setCreate] = useState<boolean>(false);
 
   const toggleCreate = () => {
+    if (!create) {
+      tournament.groupStage = new GroupStage();
+    }
     setCreate(!create);
   };
 
-  const deletePlayOffs = () => {
-    tournament.deletePlayOffs();
+  const deleteGroups = () => {
+    tournament.deleteGroups();
   };
 
-  if (tournament.bracket) {
+  if (tournament.groupStage?.groups.length && !create) {
     return (
       <>
-        <div>Created groups</div>
+        <GroupList groups={tournament.groupStage.groups} />
         <ButtonHorizontalContainerStyled>
           <ButtonErrorStyled
-            onClick={deletePlayOffs}
+            onClick={deleteGroups}
             variant="outlined"
             color="secondary"
             startIcon={<DeleteIcon />}
@@ -44,7 +50,7 @@ const TournamentGroups: React.FC<Props> = observer(({ tournament }) => {
     );
   }
   if (create) {
-    return <div>Creation groups</div>;
+    return <GroupsCreate tournament={tournament} toggleCreate={toggleCreate} />;
   }
   return (
     <ButtonHorizontalContainerStyled>

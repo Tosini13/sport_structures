@@ -9,17 +9,21 @@ import { StylesProvider } from "@material-ui/core/styles";
 import { mainTheme } from "./styled/styledConst";
 import { TournamentStoreProvider } from "./store/TournamentsStore";
 import { RouterStateProvider } from "./store/RouterState";
+import { UserStoreProvider } from "./store/UserStore";
 
 ReactDOM.render(
   // <React.StrictMode>
+
   <RouterStateProvider>
-    <TournamentStoreProvider>
-      <ThemeProvider theme={mainTheme}>
-        <StylesProvider injectFirst>
-          <App />
-        </StylesProvider>
-      </ThemeProvider>
-    </TournamentStoreProvider>
+    <UserStoreProvider>
+      <TournamentStoreProvider>
+        <ThemeProvider theme={mainTheme}>
+          <StylesProvider injectFirst>
+            <App />
+          </StylesProvider>
+        </ThemeProvider>
+      </TournamentStoreProvider>
+    </UserStoreProvider>
   </RouterStateProvider>,
   // </React.StrictMode>
   document.getElementById("root")

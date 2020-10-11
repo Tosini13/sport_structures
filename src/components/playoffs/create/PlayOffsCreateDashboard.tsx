@@ -114,7 +114,7 @@ const PlayOffsCreateDashboard: React.FC<Props> = observer(
           submitBracket={submitBracket}
         />
         <PlayOffsChooseList
-          list={tournament.groups ? tournament.groups : tournament.teams}
+          list={tournament.teams}
           chosenTeams={chosenTeams}
           setChosenTeams={handleSetChosenTeams}
         />

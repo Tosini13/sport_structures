@@ -2,12 +2,18 @@ import styled from "styled-components";
 
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
+
 import { mainTheme } from "./styledConst";
 
 export const ButtonHorizontalContainerStyled = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+`;
+
+export const IconButtonNavStyled = styled(IconButton)`
+  padding: 0px;
+  color: ${mainTheme.palette.secondary.main};
 `;
 
 export const IconButtonBackStyled = styled(IconButton)`
@@ -21,6 +27,10 @@ export const IconButtonBackStyled = styled(IconButton)`
     transform: translate(0px, 0px);
     opacity: 1;
   }
+`;
+
+export const IconButtonStarStyled = styled(IconButton)`
+  padding: 0px;
 `;
 
 export const IconButtonStyled = styled(IconButton)`
